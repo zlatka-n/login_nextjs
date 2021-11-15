@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,27 +14,21 @@ function Login({
   linkHref,
   linkText,
 }) {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const { login } = useContext(AuthContext);
+  const { login, register } = useContext(AuthContext);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty, isValid },
-  } = useForm({ mode: "onChange" });
-
-  const onSubmit = (data) => {
-    // console.log(data);
-    // login({ username, password });
-    setEmail(data.username);
-    setPassword(data.password);
-    console.log(email + password);
-    login(email, password);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    //console.log({ username, password });
+    if (signText === "Sign in") {
+      login({ username, password });
+    } else if (signText === "Sign up") {
+      register({ username, email, password });
+    }
   };
-
-  const enableButton = isDirty && isValid;
 
   return (
     <div className="max-w-full max-h-screen overflow-hidden font-mono">
@@ -57,7 +50,7 @@ function Login({
         <div className="w-2/4 bg-gray-200 max-h-screen grid items-center">
           <form
             className=" w-1/2 3xl:w-5/12 grid justify-self-center bg-white p-10"
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={(e) => onSubmit(e)}
           >
             <h1 className="mb-10 flex justify-center text-4xl">{h1Title}</h1>
             <label className="mb-3" id="username">
@@ -65,19 +58,22 @@ function Login({
             </label>
             <input
               className="outline-gray mb-5 pr-2 pl-2"
-              {...register("username", {
-                required: true,
-                maxLength: 20,
-                pattern: /^[A-Za-z]+$/i,
-              })}
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
             />
-            {errors?.username?.type === "required" && (
-              <p className="text-red-500 pb-2">This field is required</p>
-            )}
-            {errors?.username?.type === "maxLength" && (
-              <p className="text-red-500 pb-2">
-                username cannot exceed 20 characters
-              </p>
+            {signText === "Sign up" ? (
+              <>
+                <label className="mb-3" id="username">
+                  Email:
+                </label>
+                <input
+                  className="outline-gray mb-5 pr-2 pl-2"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
+              </>
+            ) : (
+              <></>
             )}
             <label className="mb-3" htmlFor="password">
               Password:
@@ -85,24 +81,10 @@ function Login({
             <input
               className="outline-gray mb-5 pr-2 pl-2"
               type="password"
-              {...register("password", {
-                required: true,
-              })}
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
-            {errors?.username?.type === "required" && (
-              <p className="text-red-500 pb-5">Password is required</p>
-            )}
-            <button
-              // className={`${
-              //   enableButton
-              //     ? "bg-green-400 mb-5 pt-2 pb-2"
-              //     : "bg-green-100 mb-5 pt-2 pb-2"
-              // }`}
-              className="bg-green-400 mb-5 pt-2 pb-2"
-              // disabled={!isDirty || !isValid}
-            >
-              {signText}
-            </button>
+            <button className="bg-green-400 mb-5 pt-2 pb-2">{signText}</button>
             <div>
               {haveAccount} <Link href={`${linkHref}`}>{linkText}</Link>
             </div>

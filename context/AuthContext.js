@@ -5,12 +5,33 @@ import { NEXT_URL } from "@/config/index";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const router = useRouter();
+
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
   ///Register
-  const register = async (user) => {
-    console.log(user);
+  const register = async ({ username, email, password }) => {
+    console.log({ username, email, password });
+
+    const res = await fetch(`${NEXT_URL}/api/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    if (res.ok) {
+      //setUser(data.user);
+      console.log("registration success");
+    } else {
+      res.status(data.statusCode);
+    }
   };
 
   //Login
@@ -34,6 +55,7 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       setUser(data.user);
+      router.push("/dashboard");
     } else {
       res.status(data.statusCode);
     }
