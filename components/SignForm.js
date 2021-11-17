@@ -70,6 +70,7 @@ function Login({
                   className="outline-gray mb-5 pr-2 pl-2"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+                  type="email"
                 />
               </>
             ) : (

@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
   ///Register
   const register = async ({ username, email, password }) => {
-    console.log({ username, email, password });
+    //console.log({ username, email, password });
 
     const res = await fetch(`${NEXT_URL}/api/register`, {
       method: "POST",
@@ -26,9 +26,10 @@ export const AuthProvider = ({ children }) => {
       }),
     });
 
+    const data = await res.json();
+
     if (res.ok) {
-      //setUser(data.user);
-      console.log("registration success");
+      router.push("/");
     } else {
       res.status(data.statusCode);
     }
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
   //Login
   const login = async ({ username: identifier, password }) => {
-    console.log({ identifier, password });
+    //console.log({ identifier, password });
 
     const res = await fetch(`${NEXT_URL}/api/login`, {
       method: "POST",
@@ -63,12 +64,12 @@ export const AuthProvider = ({ children }) => {
   //Logout
 
   const logout = async () => {
-    console.log("logout");
+    //console.log("logout");
   };
 
   //Is logged in?
   const checkUserLoggedIn = async () => {
-    console.log("check");
+    //console.log("check");
   };
 
   return (
