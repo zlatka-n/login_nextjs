@@ -30,8 +30,9 @@ export const AuthProvider = ({ children }) => {
 
     if (res.ok) {
       router.push("/");
+      setError(null);
     } else {
-      res.status(data.statusCode);
+      setError(data.message);
     }
   };
 
@@ -58,7 +59,7 @@ export const AuthProvider = ({ children }) => {
       setUser(data.user);
       router.push("/dashboard");
     } else {
-      res.status(data.statusCode);
+      setError(data.message);
     }
   };
   //Logout

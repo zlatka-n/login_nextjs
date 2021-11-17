@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
 import AuthContext from "@/context/AuthContext";
 
@@ -17,8 +17,28 @@ function Login({
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordWarning, setPasswordWarning] = useState(null);
+  const { login, register, error } = useContext(AuthContext);
 
-  const { login, register } = useContext(AuthContext);
+  //////check if passwords match, show warning if not/////
+  useEffect(() => {
+    if (confirmPassword !== "") {
+      setTimeout(() => {
+        if (confirmPassword !== password) {
+          setPasswordWarning(
+            <p className="text-red-600 mb-5">Passwords not matching</p>
+          );
+        } else {
+          setPasswordWarning(null);
+        }
+      }, 1000);
+    }
+
+    return () => {
+      setPasswordWarning(null);
+    };
+  }, [confirmPassword]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -85,7 +105,18 @@ function Login({
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
+            <label className="mb-3" htmlFor="password">
+              Confirm password:
+            </label>
+            <input
+              className="outline-gray mb-5 pr-2 pl-2"
+              type="password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={confirmPassword}
+            />
+            {passwordWarning}
             <button className="bg-green-400 mb-5 pt-2 pb-2">{signText}</button>
+            {error ? <p className="text-red-600 mb-5">{error}</p> : null}
             <div>
               {haveAccount} <Link href={`${linkHref}`}>{linkText}</Link>
             </div>
