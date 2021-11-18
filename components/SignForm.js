@@ -40,11 +40,23 @@ function Login({
     };
   }, [confirmPassword]);
 
+  const disableButton = () => {
+    let emptyFields;
+
+    if (signText === "Sign in") {
+      emptyFields = !username || !password;
+    } else if (signText === "Sign up") {
+      emptyFields = !username || !password || !email || !confirmPassword;
+    }
+    //console.log(emptyFields);
+    return emptyFields;
+  };
+
+  ///////POST REQUEST onSubmit////////
   const onSubmit = (e) => {
     e.preventDefault();
     //console.log({ username, password });
 
-    ///////POST REQUESTS////////
     if (signText === "Sign in") {
       login({ username, password });
     } else if (signText === "Sign up") {
@@ -58,7 +70,6 @@ function Login({
         <title>{title}</title>
         <meta name="description" content={description}></meta>
       </Head>
-
       <div className="flex">
         <div className="w-2/4">
           <Image
@@ -117,8 +128,18 @@ function Login({
               value={confirmPassword}
             />
             {passwordWarning}
-            <button className="bg-green-400 mb-5 pt-2 pb-2">{signText}</button>
+            <button
+              className={
+                disableButton() == true
+                  ? "bg-green-200 mb-5 pt-2 pb-2"
+                  : "bg-green-400 mb-5 pt-2 pb-2"
+              }
+              disabled={disableButton() ? true : null}
+            >
+              {signText}
+            </button>
             {error ? <p className="text-red-600 mb-5">{error}</p> : null}
+
             <div>
               {haveAccount} <Link href={`${linkHref}`}>{linkText}</Link>
             </div>
