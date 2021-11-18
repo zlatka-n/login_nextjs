@@ -43,6 +43,8 @@ function Login({
   const onSubmit = (e) => {
     e.preventDefault();
     //console.log({ username, password });
+
+    ///////POST REQUESTS////////
     if (signText === "Sign in") {
       login({ username, password });
     } else if (signText === "Sign up") {
