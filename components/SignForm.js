@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-import AuthContext from "@/context/AuthContext";
+// import AuthContext from "@/context/AuthContext";
+import AuthContext from "../context/AuthContext";
 
 function Login({
   title,
@@ -118,15 +119,21 @@ function Login({
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
-            <label className="mb-3" htmlFor="password">
-              Confirm password:
-            </label>
-            <input
-              className="outline-gray mb-5 pr-2 pl-2"
-              type="password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              value={confirmPassword}
-            />
+            {signText === "Sign up" ? (
+              <>
+                <label className="mb-3" htmlFor="password">
+                  Confirm password:
+                </label>
+                <input
+                  className="outline-gray mb-5 pr-2 pl-2"
+                  type="password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  value={confirmPassword}
+                />
+              </>
+            ) : (
+              <></>
+            )}
             {passwordWarning}
             <button
               className={

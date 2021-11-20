@@ -1,9 +1,10 @@
 import React from "react";
-import SignIn from "../components/SignIn";
+import SignForm from "../components/SignForm";
 import { render, screen } from "@testing-library/react";
-// import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom/extend-expect";
 
-test("on initial render, the pay button is disabled", async () => {
-  render(<SignIn />);
+test("on initial render, the  button is disabled", async () => {
+  render(<SignForm />);
+
   expect(await screen.findByRole("button", { name: /Login/i })).toBeDisabled();
 });

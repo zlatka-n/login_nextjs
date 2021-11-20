@@ -1,6 +1,4 @@
 import SignForm from "/components/SignForm";
-import AuthContext from "@/context/AuthContext";
-import { useContext } from "react";
 
 export default function SignIn() {
   const h1Title = "Sign in";
