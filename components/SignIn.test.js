@@ -6,4 +6,5 @@ import AuthProvider from "../context/AuthContext";
 
 test.skip("on initial render, the  button is disabled", () => {
   render(<SignIn />, { wrapper: AuthProvider });
+  //////git commit --amend
 });
