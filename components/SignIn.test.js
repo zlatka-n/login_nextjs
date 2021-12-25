@@ -6,5 +6,4 @@ import AuthProvider from "../context/AuthContext";
 
 test.skip("on initial render, the  button is disabled", () => {
   render(<SignIn />, { wrapper: AuthProvider });
-  // expect(await screen.findByRole("button", { name: /Login/i })).toBeDisabled();
 });
