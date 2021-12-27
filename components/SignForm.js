@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-// import AuthContext from "@/context/AuthContext";
 import AuthContext from "../context/AuthContext";
 
 function Login({
@@ -66,24 +65,26 @@ function Login({
   };
 
   return (
-    <div className="max-w-full max-h-screen overflow-hidden font-mono">
+    <div className="max-w-full max-h-screen md:overflow-hidden font-mono">
       <Head>
         <title>{title}</title>
         <meta name="description" content={description}></meta>
       </Head>
-      <div className="flex">
-        <div className="w-2/4">
+      <div className="grid md:flex">
+        <div className="md:w-2/4">
           <Image
             src="/picture/shg_login_pic.jpg"
             width={500}
             height={600}
             layout="responsive"
+            alt="login image"
+            priority="true"
           />
         </div>
 
-        <div className="w-2/4 bg-gray-200 max-h-screen grid items-center">
+        <div className="order-first md:order-none md:w-2/4 md:bg-gray-200 h-4/6 md:h-screen md:max-h-screen md:grid md:items-center">
           <form
-            className=" w-1/2 3xl:w-5/12 grid justify-self-center bg-white p-10"
+            className="md:w-1/2 3xl:w-5/12 grid justify-self-center bg-slate-100 md:bg-white p-10"
             onSubmit={(e) => onSubmit(e)}
           >
             <h1 className="mb-10 flex justify-center text-4xl">{h1Title}</h1>

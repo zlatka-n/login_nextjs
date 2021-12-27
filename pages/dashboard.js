@@ -1,5 +1,10 @@
-function Dashboard() {
-  return <div>This is dashboard</div>;
-}
+import Dashboard from "@/components/Dashboard";
 
-export default Dashboard;
+function DashboardPage() {
+  return (
+    <div>
+      <Dashboard />
+    </div>
+  );
+}
+export default DashboardPage;

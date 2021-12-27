@@ -1,4 +1,4 @@
-import SignForm from "/components/SignForm";
+import SignForm from "./SignForm";
 
 export default function SignIn() {
   const h1Title = "Sign in";

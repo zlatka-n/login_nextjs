@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
 
     const data = await res.json();
 
-    console.log(data);
+    //console.log(data);
 
     if (res.ok) {
       setUser(data.user);
@@ -66,16 +66,25 @@ export const AuthProvider = ({ children }) => {
   //Logout
 
   const logout = async () => {
-    //console.log("logout");
+    console.log("user logged out");
+    setUser(null);
+    router.push("/");
+    ////TODO: setUser(null), push user to login page////
   };
 
   //Is logged in?
   const checkUserLoggedIn = async () => {
+    if (user) {
+      //console.log("user logged in");
+    }
+
     //console.log("check");
   };
 
   return (
-    <AuthContext.Provider value={{ user, error, register, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, error, register, login, logout, checkUserLoggedIn }}
+    >
       {children}
     </AuthContext.Provider>
   );
