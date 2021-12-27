@@ -15,6 +15,7 @@ function Dashboard() {
     });
 
     return function cleanup() {
+      //////sjsjsjs
       setNasa("");
     };
   }, []);
@@ -22,11 +23,14 @@ function Dashboard() {
   const { user, logout } = useContext(AuthContext);
 
   const onLogOutClick = () => {
+    /////bla
+    ////react context
     logout();
   };
 
   const myLoader = ({ src, width }) => {
     return `${src}?w=${width}`;
+    ////sisiis
   };
 
   return (
