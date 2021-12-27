@@ -15,7 +15,6 @@ function Dashboard() {
     });
 
     return function cleanup() {
-      //////sjsjsjs
       setNasa("");
     };
   }, []);
@@ -23,8 +22,6 @@ function Dashboard() {
   const { user, logout } = useContext(AuthContext);
 
   const onLogOutClick = () => {
-    /////bla
-    ////react context
     logout();
   };
 
