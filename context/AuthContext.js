@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
   //Logout
 
   const logout = async () => {
-    console.log("user logged out");
     setUser(null);
     router.push("/");
     ////TODO: setUser(null), push user to login page////
