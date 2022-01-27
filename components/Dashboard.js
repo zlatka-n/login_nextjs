@@ -1,4 +1,5 @@
-import AuthContext from "@/context/AuthContext";
+// import AuthContext from "@/context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
@@ -19,7 +20,7 @@ function Dashboard() {
     };
   }, []);
 
-  const { user, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   const onLogOutClick = () => {
     logout();
