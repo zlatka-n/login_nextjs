@@ -5,5 +5,12 @@ import AuthContext from "@/context/AuthContext";
 
 export default function Home() {
   const { user } = useContext(AuthContext);
-  return <div>{user ? <Dashboard /> : <SignIn />}</div>;
+  const title = "Sign In";
+  const button = "Log In";
+
+  return (
+    <div>
+      <SignIn title={title} button={button} />
+    </div>
+  );
 }
